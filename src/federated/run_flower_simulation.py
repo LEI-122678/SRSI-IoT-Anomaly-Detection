@@ -1,3 +1,4 @@
+
 import os
 
 # Evitar excesso de threads em cada processo Ray.
@@ -11,17 +12,18 @@ from src.federated.flower_client import (
 )
 from src.federated.flower_server import (
     app as server_app,
+    MODEL_NAME,
+    NUM_ROUNDS,
+    NUM_CLIENTS,
 )
-
-NUM_CLIENTS = 5
 
 
 def main():
     print("=== SIMULAÇÃO FLOWER V2-B ===")
-    print("Arquitetura: GRU")
+    print("Arquitetura:", MODEL_NAME.upper())
     print("Clientes:", NUM_CLIENTS)
     print("Algoritmo: FedAvg")
-    print("Rondas: 2")
+    print("Máximo de rondas:", NUM_ROUNDS)
     print("Backend: Ray")
     print("Dispositivo: CPU")
     print("============================")

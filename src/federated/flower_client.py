@@ -2,6 +2,8 @@
 from pathlib import Path
 
 import numpy as np
+import os
+import hashlib
 import torch
 from torch import nn
 from torch.utils.data import DataLoader, TensorDataset
@@ -16,6 +18,8 @@ from flwr.app import (
 from flwr.clientapp import ClientApp
 
 from src.models.gru import GRUClassifier
+from src.models.lstm import LSTMClassifier
+from src.models.transformer import TransformerClassifier
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -33,15 +37,39 @@ PARTITION_DIR = (
 NUM_CLIENTS = 5
 BATCH_SIZE = 32
 LOCAL_EPOCHS = 1
-SEED = 42
+SEED = int(os.environ.get("SRSI_SEED", "42"))
+MODEL_NAME = os.environ.get("SRSI_MODEL", "gru").lower()
 
 app = ClientApp()
 
 
 def build_model():
-    return GRUClassifier(
-        input_size=6,
-        hidden_size=32
+    if MODEL_NAME == "gru":
+        return GRUClassifier(
+            input_size=6,
+            hidden_size=32
+        )
+
+    if MODEL_NAME == "lstm":
+        return LSTMClassifier(
+            input_size=6,
+            hidden_size=32,
+            num_layers=1,
+            dropout=0.2
+        )
+
+    if MODEL_NAME == "transformer":
+        return TransformerClassifier(
+            input_size=6,
+            hidden_size=32,
+            num_layers=1,
+            dropout=0.2,
+            nhead=4,
+            max_seq_len=5
+        )
+
+    raise ValueError(
+        f"Arquitetura não suportada: {MODEL_NAME}"
     )
 
 
@@ -90,9 +118,18 @@ def train(msg: Message, context: Context):
 
     torch.set_num_threads(1)
 
+    # Solicitar operações determinísticas.
+    torch.use_deterministic_algorithms(True)
+
+    # Seed específica para cada cliente e ronda.
+    local_seed = SEED + round_id * 100 + client_id
+
+    torch.manual_seed(local_seed)
+    np.random.seed(local_seed)
+
     # Reprodutibilidade da ordem dos batches.
     generator = torch.Generator().manual_seed(
-        SEED + round_id * 100 + client_id
+        local_seed
     )
 
     X, y = load_client_data(client_id)
@@ -111,6 +148,23 @@ def train(msg: Message, context: Context):
     model.load_state_dict(
         msg.content["arrays"].to_torch_state_dict()
     )
+
+    def fingerprint(state):
+        digest = hashlib.sha256()
+
+        for name, tensor in sorted(state.items()):
+            digest.update(name.encode("utf-8"))
+            digest.update(
+                tensor.detach()
+                .cpu()
+                .contiguous()
+                .numpy()
+                .tobytes()
+            )
+
+        return digest.hexdigest()[:16]
+
+    initial_hash = fingerprint(model.state_dict())
 
     model.train()
 
@@ -174,6 +228,16 @@ def train(msg: Message, context: Context):
         f"Cliente {client_id} | "
         f"Janelas: {len(y)} | "
         f"Loss: {mean_loss:.4f}",
+        flush=True
+    )
+
+    final_hash = fingerprint(model.state_dict())
+
+    print(
+        f"[DIAGNOSTICO] ronda={round_id} "
+        f"cliente={client_id} "
+        f"initial={initial_hash} "
+        f"final={final_hash}",
         flush=True
     )
 
