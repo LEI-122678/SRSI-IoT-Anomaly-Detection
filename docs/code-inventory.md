@@ -108,3 +108,14 @@ Os scripts exploratórios e as experiências anteriores continuam arquivados por
 - O protocolo e os resultados finais estão em `results/v2c_final_protocol.json` e `results/v2c_final_results_consolidated.json`.
 
 **Total:** 59 scripts funcionais/de análise listados, excluindo `__init__.py`.
+
+## Testes automatizados
+
+- [`test_models.py`](../tests/test_models.py): testes de
+  forward e gradientes de GRU, LSTM e Transformer.
+- [`test_fedavg.py`](../tests/test_fedavg.py): teste
+  de agregação ponderada com parâmetros sintéticos.
+- `tests/test_environment.py`: verificação manual do ambiente,
+  não recolhida automaticamente pelo pytest.
+
+Executar: `python -m pytest tests/ -v`.
