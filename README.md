@@ -12,6 +12,7 @@ Este repositório reúne o código, os protocolos e os resultados de uma investi
 |---|---|
 | [Documentação completa](docs/README.md) | Índice de todas as páginas técnicas |
 | [Arquitetura](docs/architecture.md) | Componentes, modelos e interdependências |
+| [Inventário do código](docs/code-inventory.md) | Lista e responsabilidades dos 59 scripts Python |
 | [Dataset](docs/dataset.md) | ToN_IoT, características e preparação |
 | [Metodologia](docs/methodology.md) | Desenho experimental e métricas |
 | [Experiências](docs/experiments/README.md) | Percurso experimental e versões |

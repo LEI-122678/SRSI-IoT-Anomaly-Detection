@@ -9,6 +9,7 @@ Este espaço documenta a implementação experimental de deteção binária de a
 | Tema | Documento |
 |---|---|
 | Componentes de software, responsabilidades e fluxo de dados | [Arquitetura](architecture.md) |
+| Inventário dos 59 scripts Python e respetivas funções | [Inventário do código](code-inventory.md) |
 | Dados ToN_IoT, características e construção de sequências | [Dataset](dataset.md) |
 | Protocolo, validação, hiperparâmetros e métricas | [Metodologia](methodology.md) |
 | Comparação dos cenários V2-B e V2-C | [Experiências](experiments/README.md) |
