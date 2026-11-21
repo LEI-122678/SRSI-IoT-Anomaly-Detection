@@ -1,0 +1,62 @@
+[
+  {
+    "model": "Always Normal",
+    "parameters": 0,
+    "inference_ms_per_window": null,
+    "accuracy": 0.8788674839462931,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "balanced_accuracy": 0.5,
+    "fpr": 0.0,
+    "tn": 3011,
+    "fp": 0,
+    "fn": 415,
+    "tp": 0
+  },
+  {
+    "model": "LSTM",
+    "parameters": 5153,
+    "inference_ms_per_window": 0.006659515470062326,
+    "accuracy": 0.3712784588441331,
+    "precision": 0.15317112086158755,
+    "recall": 0.9253012048192771,
+    "f1": 0.26283367556468173,
+    "balanced_accuracy": 0.6101099182515516,
+    "fpr": 0.7050813683161741,
+    "tn": 888,
+    "fp": 2123,
+    "fn": 31,
+    "tp": 384
+  },
+  {
+    "model": "GRU",
+    "parameters": 3873,
+    "inference_ms_per_window": 0.00794652656055889,
+    "accuracy": 0.36719206071220084,
+    "precision": 0.14925970388155263,
+    "recall": 0.8987951807228916,
+    "f1": 0.2560054907343857,
+    "balanced_accuracy": 0.596358732839028,
+    "fpr": 0.7060777150448356,
+    "tn": 885,
+    "fp": 2126,
+    "fn": 42,
+    "tp": 373
+  },
+  {
+    "model": "Transformer",
+    "parameters": 9025,
+    "inference_ms_per_window": 0.013372475191293897,
+    "accuracy": 0.37244600116754234,
+    "precision": 0.15174628663187475,
+    "recall": 0.9108433734939759,
+    "f1": 0.2601514108740537,
+    "balanced_accuracy": 0.6045415804700036,
+    "fpr": 0.7017602125539688,
+    "tn": 898,
+    "fp": 2113,
+    "fn": 37,
+    "tp": 378
+  }
+]
