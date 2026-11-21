@@ -1,0 +1,42 @@
+{
+  "experiment": "v2c_final_ip_generalization",
+  "status": "frozen_before_final_evaluation",
+  "selection_basis": "median_best_epoch_or_round_from_internal_validation",
+  "seeds": [
+    42,
+    123,
+    2026
+  ],
+  "models": [
+    "gru",
+    "lstm",
+    "transformer"
+  ],
+  "training_data": "data/processed/ton_iot_v2/ip_generalization/train.npz",
+  "evaluation_data": "data/processed/ton_iot_v2/ip_generalization/evaluation.npz",
+  "training_ips": 37,
+  "evaluation_ips": 3,
+  "centralized_epochs": {
+    "gru": 1,
+    "lstm": 1,
+    "transformer": 1
+  },
+  "federated_rounds": {
+    "gru": 15,
+    "lstm": 4,
+    "transformer": 3
+  },
+  "federated_clients": 5,
+  "federated_local_epochs": 1,
+  "batch_size": 32,
+  "learning_rate": 0.001,
+  "hidden_size": 32,
+  "classification_threshold": 0.5,
+  "checkpoint_selection": "fixed_training_duration",
+  "final_evaluation_rule": "Evaluate each frozen final model once. Do not tune hyperparameters, thresholds, epochs or rounds using evaluation results.",
+  "limitations": [
+    "Evaluation IPs were chosen after inspecting distributions.",
+    "This is IP-held-out generalization, not temporal generalization.",
+    "Federated learning alone does not guarantee privacy."
+  ]
+}

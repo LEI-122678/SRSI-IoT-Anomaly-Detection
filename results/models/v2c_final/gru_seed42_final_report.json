@@ -1,0 +1,23 @@
+{
+  "experiment": "v2c_final_ip_generalization",
+  "approach": "centralized",
+  "model": "gru",
+  "seed": 42,
+  "training_windows": 21011,
+  "training_ips": 37,
+  "epochs": 1,
+  "batch_size": 32,
+  "learning_rate": 0.001,
+  "train_loss": 0.15482622283537414,
+  "training_seconds": 1.04374259999895,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.15482622283537414
+    }
+  ],
+  "checkpoint_selection": "fixed_training_duration",
+  "validation_used": false,
+  "evaluation_used": false,
+  "checkpoint": "C:\\Users\\gonca\\PycharmProjects\\SRSI-IoT-Anomaly-Detection\\results\\models\\v2c_final\\gru_seed42_final.pt"
+}

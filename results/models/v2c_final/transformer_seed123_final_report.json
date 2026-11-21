@@ -1,0 +1,23 @@
+{
+  "experiment": "v2c_final_ip_generalization",
+  "approach": "centralized",
+  "model": "transformer",
+  "seed": 123,
+  "training_windows": 21011,
+  "training_ips": 37,
+  "epochs": 1,
+  "batch_size": 32,
+  "learning_rate": 0.001,
+  "train_loss": 0.10673120860841045,
+  "training_seconds": 1.7173536000045715,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.10673120860841045
+    }
+  ],
+  "checkpoint_selection": "fixed_training_duration",
+  "validation_used": false,
+  "evaluation_used": false,
+  "checkpoint": "C:\\Users\\gonca\\PycharmProjects\\SRSI-IoT-Anomaly-Detection\\results\\models\\v2c_final\\transformer_seed123_final.pt"
+}
