@@ -102,7 +102,6 @@ Os scripts exploratórios e as experiências anteriores continuam arquivados por
 
 ## Outros módulos e convenções
 
-- `src/attacks/` e `src/privacy/` contêm atualmente apenas `__init__.py`. Não representam, por si só, implementações de ataques ou de garantias de privacidade.
 - Os ficheiros `__init__.py` não são enumerados nas tabelas por serem inicializadores de pacotes.
 - Os scripts dependem de imports como `src.models.*` e de caminhos localizados em `data/` e `results/`. Qualquer alteração de nomes ou diretórios requer nova auditoria.
 - Para a metodologia, consultar [metodologia](methodology.md), [experiências](experiments/README.md) e [reprodutibilidade](reproducibility.md).

@@ -153,7 +153,6 @@ SRSI-IoT-Anomaly-Detection/
 └── README.md
 ```
 
-Existem também os diretórios `src/attacks/` e `src/privacy/`, mas a sua existência **não significa que ataques ao treino federado ou mecanismos de proteção de privacidade tenham sido implementados**.
 
 ## Instalação
 
