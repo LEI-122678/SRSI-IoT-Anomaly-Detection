@@ -218,3 +218,19 @@ Os CSV/JSON versionados são a referência para as tabelas e gráficos científi
 ---
 
 **SRSI — Deteção de Anomalias em Redes IoT** · [Consultar a documentação](docs/README.md)
+
+## Validação técnica do protótipo
+
+Foram realizados quatro testes automáticos:
+- GRU, LSTM e Transformer: forward e cálculo de gradientes.
+- Flower/FedAvg: agregação ponderada com parâmetros sintéticos.
+- Resultado: 4 testes aprovados.
+
+Os 18 checkpoints finais V2-C foram carregados nas arquiteturas
+correspondentes com `strict=True`. Os seis artefactos JSON/CSV
+finais também foram verificados.
+
+Para executar os testes: `python -m pytest tests/ -v`.
+
+Estas verificações não constituem um teste integrado completo
+da simulação Flower nem repetem a avaliação final V2-C.

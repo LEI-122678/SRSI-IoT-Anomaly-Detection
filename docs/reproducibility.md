@@ -67,3 +67,22 @@ A execução do `pytest` depende das ferramentas efetivamente instaladas. `compi
 ## Preservação do histórico
 
 O commit `aebb592` na branch `goncalo` guarda o código V2-C final, os relatórios de treino, as tabelas de avaliação e o JSON consolidado. Os pesos finais permanecem locais e não fazem parte desse commit.
+
+## Testes automáticos e validação técnica
+
+Executar a partir da raiz do repositório:
+
+`python -m pytest tests/ -v`
+
+- `tests/test_models.py`: forward e gradientes dos três modelos.
+- `tests/test_fedavg.py`: agregação ponderada Flower/FedAvg
+  utilizando parâmetros sintéticos.
+
+Resultado observado: 4 testes aprovados.
+
+Adicionalmente, os 18 checkpoints finais foram carregados
+com `strict=True` e os seis artefactos finais JSON/CSV
+foram verificados.
+
+Não foi executado um teste integrado completo de Flower.
+A avaliação final V2-C não foi repetida.
