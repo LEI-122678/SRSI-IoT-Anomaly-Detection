@@ -1,5 +1,6 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
+*.pyc
 *.py[codz]
 *$py.class
 
@@ -237,3 +238,7 @@ data/processed/*
 # Ficheiros temporários
 .DS_Store
 *.log
+
+# Datasets
+data/raw/
+data/processed/
