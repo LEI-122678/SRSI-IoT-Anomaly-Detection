@@ -1,0 +1,22 @@
+{
+  "experiment": "flower_v2c_final",
+  "approach": "federated",
+  "algorithm": "FedAvg",
+  "model": "gru",
+  "seed": 123,
+  "training_windows": 21011,
+  "training_ips": 37,
+  "num_clients": 5,
+  "fixed_rounds": 15,
+  "local_epochs": 1,
+  "batch_size": 32,
+  "learning_rate": 0.001,
+  "training_seconds": 24.736186800000723,
+  "checkpoint_selection": "fixed_training_duration",
+  "validation_used": false,
+  "evaluation_used": false,
+  "device": "cpu",
+  "backend": "ray",
+  "framework": "flower",
+  "checkpoint": "C:\\Users\\gonca\\PycharmProjects\\SRSI-IoT-Anomaly-Detection\\results\\federated\\flower_v2c_final_gru_seed123\\gru_final.pt"
+}
