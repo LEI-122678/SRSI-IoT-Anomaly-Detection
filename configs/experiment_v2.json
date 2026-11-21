@@ -1,0 +1,50 @@
+
+{
+  "experiment_name": "ton_iot_v2",
+  "dataset": "ToN_IoT Network",
+  "dataset_directory": "data/raw/ton_iot",
+  "task": "binary_intrusion_detection",
+  "normal_label": 0,
+  "attack_label": 1,
+  "attack_types": [
+    "scanning",
+    "ddos",
+    "dos",
+    "injection",
+    "mitm",
+    "password",
+    "ransomware",
+    "xss",
+    "backdoor"
+  ],
+  "temporal_representation": {
+    "group_by": "src_ip",
+    "aggregation_seconds": 60,
+    "window_sizes_to_evaluate": [5, 10, 20],
+    "window_stride": 1
+  },
+  "features": {
+    "candidate_features": [
+      "connections",
+      "src_bytes_sum",
+      "dst_bytes_sum",
+      "src_pkts_sum",
+      "dst_pkts_sum",
+      "duration_mean"
+    ],
+    "validate_against_raw_data": true,
+    "fit_scaler_on_training_only": true
+  },
+  "splitting": {
+    "strategy": "to_be_defined_after_raw_audit",
+    "prevent_window_overlap_across_splits": true,
+    "reserve_independent_test": true
+  },
+  "models": [
+    "LSTM",
+    "GRU",
+    "Transformer"
+  ],
+  "seeds": [42, 123, 2026],
+  "status": "protocol_draft"
+}

@@ -1,0 +1,4 @@
+model,seed,parameters,checkpoint_kb,latency_ms_per_window,throughput_windows_per_second,total_inference_seconds_mean,total_inference_seconds_std
+LSTM,42,5153,23.38,0.005247,190595.59,0.0512,0.003
+GRU,42,3873,18.36,0.005507,181571.39,0.0537,0.0005
+Transformer,42,9025,42.99,0.010779,92772.63,0.1052,0.0012

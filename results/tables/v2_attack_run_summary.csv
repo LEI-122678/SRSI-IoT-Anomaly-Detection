@@ -1,0 +1,10 @@
+attack,windows,independent_runs,unique_ips,days,largest_run_windows
+scanning,969,72,16,2,132
+dos,1536,11,7,2,343
+ddos,3002,21,8,2,548
+injection,400,20,7,1,99
+password,1646,10,6,2,461
+xss,815,5,4,1,341
+backdoor,1550,2,1,2,968
+ransomware,188,9,3,1,74
+mitm,37,11,4,1,11
