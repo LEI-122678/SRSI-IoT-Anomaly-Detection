@@ -222,7 +222,7 @@ def train(msg: Message, context: Context):
 
     # Adulterar apenas a atualizacao do cliente 4.
     MALICIOUS_CLIENT_ID = 4
-    ATTACK_FACTOR = 10.0
+    ATTACK_FACTOR = -10.0
 
     if client_id == MALICIOUS_CLIENT_ID:
         with torch.no_grad():

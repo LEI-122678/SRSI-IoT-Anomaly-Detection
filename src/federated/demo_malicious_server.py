@@ -40,10 +40,12 @@ MODEL_NAME = "gru"
 
 # Pasta exclusiva da experiencia com cliente malicioso.
 # Nunca substituir os resultados da demonstracao benigna.
+# Resultados exclusivos do ataque com fator -10
 OUTPUT_DIR = (
     ROOT / "results" / "demonstration"
-    / "flower_malicious"
+    / "flower_malicious_neg10"
 )
+
 
 
 # Early stopping
