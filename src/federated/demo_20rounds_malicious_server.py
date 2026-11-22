@@ -41,9 +41,11 @@ MODEL_NAME = "gru"
 # Pasta exclusiva da experiencia com cliente malicioso.
 # Nunca substituir os resultados da demonstracao benigna.
 # Resultados exclusivos do ataque com fator -10
+
+# Nova execucao para verificar o checkpoint da ronda 20
 OUTPUT_DIR = (
     ROOT / "results" / "demonstration"
-    / "flower_20rounds_malicious_neg10"
+    / "flower_20rounds_malicious_neg10_verified"
 )
 
 
@@ -290,6 +292,23 @@ def main(grid: Grid, context: Context):
         raise RuntimeError(
             "O Flower não devolveu o modelo global."
         )
+
+    # Guardar o modelo global da ultima ronda
+    final_state = result.arrays.to_torch_state_dict()
+
+    torch.save(
+        {
+            "model_state_dict": final_state,
+            "model_name": MODEL_NAME,
+            "experiment": EXPERIMENT_NAME,
+            "seed": SEED,
+            "input_size": 6,
+            "hidden_size": 32,
+            "last_round": NUM_ROUNDS,
+            "num_clients": NUM_CLIENTS,
+        },
+        OUTPUT_DIR / "gru_last.pt"
+    )
 
     if best_round is None or best_state is None:
         raise RuntimeError(
