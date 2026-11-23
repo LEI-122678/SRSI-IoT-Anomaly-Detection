@@ -36,6 +36,58 @@ A V2-C testa exclusivamente a separação por IP dentro do período de dados uti
 
 FedAvg permite treinar sem centralizar diretamente os exemplos brutos em cada ronda, mas as atualizações do modelo podem revelar informação. A simulação não demonstra, por si só, segurança, confidencialidade, resistência a ataques adversariais ou garantias formais de privacidade.
 
+### 8.1. Limitações da experiência de model poisoning
+
+Foi realizada uma experiência complementar de segurança
+com Flower e FedAvg, envolvendo cinco clientes lógicos,
+dos quais um adulterou sistematicamente as atualizações
+do modelo GRU.
+
+Na ronda 20, o cenário benigno apresentou um F1-score
+de 0,8705, enquanto o cenário adversarial apresentou
+um F1-score de 0,0000. A taxa de falsos positivos
+aumentou de 0,0619 para 0,2575.
+
+A verificação independente do checkpoint malicioso
+confirmou que nenhuma das 1 911 janelas de ataque
+foi corretamente identificada e que ocorreram
+811 falsos positivos.
+
+Estes resultados demonstram uma degradação grave
+do desempenho na configuração experimental analisada.
+Contudo, devem ser considerados os seguintes limites:
+
+- Foi utilizada apenas a arquitetura GRU.
+- A experiência foi executada com a semente 42.
+- O ataque envolveu um cliente malicioso entre cinco.
+- O fator de adulteração foi fixado em -10.
+- O ataque esteve ativo desde a primeira ronda.
+- Não foram avaliadas diferentes intensidades de ataque.
+- Não foram implementados mecanismos de defesa,
+  como agregação robusta ou filtragem de atualizações.
+- Os clientes foram simulados, não correspondendo
+  a dispositivos IoT físicos.
+- Os resultados foram obtidos exclusivamente com dados
+  de desenvolvimento e validação interna.
+
+A experiência não permite concluir que todos os
+sistemas federados sejam vulneráveis da mesma forma,
+nem que qualquer cliente malicioso consiga sempre
+comprometer o modelo global.
+
+O ensaio incidiu sobre a integridade da aprendizagem,
+não sobre a confidencialidade dos dados. Não foram
+realizados testes de membership inference, inversão
+de modelos ou proteção criptográfica das atualizações.
+
+Os três IPs reservados para a avaliação final V2-C
+não foram utilizados nesta experiência. Assim,
+os resultados adversariais não devem ser confundidos
+com as métricas das 18 avaliações finais.
+
+Para a configuração, execução e resultados detalhados,
+consultar [Demonstração federada e segurança](../federated-security-demo.md).
+
 ## 9. Comparação e seleção experimental
 
 As durações finais foram selecionadas por validação interna e congeladas antes da avaliação. As abordagens possuem dinâmicas de otimização distintas (épocas centralizadas vs. rondas federadas), pelo que o estudo compara **configurações experimentais específicas**, e não custos computacionais ou orçamentos de otimização perfeitamente equivalentes.
