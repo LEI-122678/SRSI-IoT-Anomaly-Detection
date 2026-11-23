@@ -277,7 +277,11 @@ def main(grid: Grid, context: Context):
     print("Dispositivo: CPU")
     print("===================================\n")
 
-    # Executar treino federado
+    # Protocolo experimental: executar as 20 rondas completas.
+    # A função should_stop encontra-se definida neste módulo,
+    # mas não está integrada na estratégia Flower.
+    # Assim, a paragem antecipada não está ativa nesta
+    # demonstração e não altera os resultados reportados.
     result = strategy.start(
         grid=grid,
         initial_arrays=initial_arrays,

@@ -18,7 +18,7 @@ BENIGN = (
 )
 
 MALICIOUS = (
-    RESULTS / "flower_20rounds_malicious_neg10"
+    RESULTS / "flower_20rounds_malicious_neg10_verified"
     / "validation_history.csv"
 )
 
