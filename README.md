@@ -163,7 +163,6 @@ São necessários Python compatível com [`requirements.txt`](requirements.txt),
 ```powershell
 git clone https://github.com/LEI-122678/SRSI-IoT-Anomaly-Detection.git
 cd SRSI-IoT-Anomaly-Detection
-git switch goncalo
 
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
