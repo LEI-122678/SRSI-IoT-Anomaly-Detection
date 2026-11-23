@@ -1,5 +1,3 @@
-<!-- Gerado por gerar_documentacao_srsi.py; pode ser atualizado pelo script. -->
-
 # Dataset e representação dos dados
 
 [Índice](README.md) · [Arquitetura](architecture.md) · [Dataset](dataset.md) · [Metodologia](methodology.md) · [Reprodutibilidade](reproducibility.md)

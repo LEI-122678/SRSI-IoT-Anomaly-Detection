@@ -1,5 +1,3 @@
-<!-- Gerado por gerar_documentacao_srsi.py; pode ser atualizado pelo script. -->
-
 # Comparação entre aprendizagem centralizada e federada
 
 [← Resultados](README.md) · [Experiência V2-C](../experiments/v2c.md)

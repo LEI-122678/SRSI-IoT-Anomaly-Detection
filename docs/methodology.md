@@ -1,5 +1,3 @@
-<!-- Gerado por gerar_documentacao_srsi.py; pode ser atualizado pelo script. -->
-
 # Metodologia experimental
 
 [Índice](README.md) · [Arquitetura](architecture.md) · [Dataset](dataset.md) · [Metodologia](methodology.md) · [Reprodutibilidade](reproducibility.md)
@@ -62,5 +60,110 @@ As tabelas apresentam média e desvio-padrão de três seeds. Como há apenas tr
 ## Integridade experimental
 
 Os três IPs reservados foram escolhidos após análise das distribuições, pelo que o protocolo não constitui uma seleção aleatória nem um teste completamente cego. Os resultados finais foram preservados após a primeira avaliação; não realizar afinação com os dados de avaliação.
+
+## Experiência complementar de segurança — Model poisoning
+
+### Objetivo
+
+Avaliar o impacto da adulteração de atualizações
+enviadas por um cliente malicioso no treino federado
+de uma GRU, utilizando Flower e FedAvg.
+
+Esta experiência é independente da avaliação final
+V2-C e utiliza exclusivamente dados de desenvolvimento.
+
+### Configuração experimental
+
+| Parâmetro | Valor |
+|---|---|
+| Arquitetura | GRU |
+| Estratégia de agregação | FedAvg |
+| Plataforma | Flower |
+| Clientes lógicos | 5 |
+| Cliente malicioso | Cliente 4 |
+| Rondas federadas | 20 |
+| Épocas locais | 1 por ronda |
+| Batch | 32 |
+| Taxa de aprendizagem | 0,001 |
+| Semente | 42 |
+| Janelas de treino | 15 951 |
+| Janelas de validação | 5 060 |
+| Fator de adulteração | -10 |
+| Limiar de classificação | 0,5 |
+
+Foram executados dois cenários com a mesma arquitetura,
+partições e configuração de treino:
+
+1. **Benigno:** os cinco clientes enviam atualizações
+   legítimas dos parâmetros.
+2. **Adversarial:** quatro clientes enviam atualizações
+   legítimas e o cliente 4 adultera sistematicamente
+   a sua atualização antes da agregação.
+
+### Mecanismo de ataque
+
+O cliente malicioso recebe os parâmetros globais,
+executa uma época de treino local e calcula os
+parâmetros que enviaria normalmente ao servidor.
+
+Antes do envio, aplica a transformação:
+
+θ_mal = θ_global + α × (θ_local - θ_global)
+
+com α = -10.
+
+Este fator inverte a direção da atualização local
+e amplifica a sua magnitude dez vezes.
+
+A adulteração afeta os parâmetros treináveis do modelo.
+Não são modificados os dados nem os rótulos de treino,
+pelo que o ataque é classificado como **model poisoning**,
+e não como data poisoning.
+
+O servidor utiliza FedAvg convencional, sem mecanismos
+de filtragem ou rejeição de atualizações maliciosas.
+
+### Avaliação e verificação
+
+O desempenho foi acompanhado ao longo das 20 rondas
+utilizando 5 060 janelas de validação interna.
+
+Foram analisados o F1-score, a sensibilidade, a taxa
+de falsos positivos e a perda de validação.
+
+A consistência dos resultados adversariais foi
+verificada através do carregamento independente
+dos checkpoints GRU e do recálculo das previsões
+com limiar de 0,5.
+
+No cenário adversarial, foram verificados:
+
+- O melhor checkpoint segundo a perda de validação,
+  correspondente à ronda 1.
+- O modelo global da ronda 20, preservado na
+  execução de verificação.
+
+A experiência não utilizou os três endereços IP
+reservados para a avaliação final V2-C.
+
+### Limitações metodológicas
+
+A experiência considera uma única arquitetura,
+uma semente, cinco clientes lógicos e um fator
+de adulteração específico.
+
+O ataque encontra-se ativo desde a primeira ronda.
+Não foram avaliadas outras estratégias adversariais,
+defesas robustas ou dispositivos IoT físicos.
+
+Os resultados permitem analisar o impacto deste ataque
+na configuração observada, mas não demonstram
+vulnerabilidade universal dos sistemas federados
+nem propriedades de confidencialidade.
+
+Para consultar os comandos, artefactos e resultados,
+ver [Demonstração federada e segurança](federated-security-demo.md).
+
+---
 
 Ver também [Limitações](results/limitations.md) e [Reprodutibilidade](reproducibility.md).

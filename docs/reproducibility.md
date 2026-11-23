@@ -1,5 +1,3 @@
-<!-- Gerado por gerar_documentacao_srsi.py; pode ser atualizado pelo script. -->
-
 # Reprodutibilidade e execução
 
 [← Índice da documentação](README.md) · [Metodologia](methodology.md)
@@ -84,5 +82,21 @@ Adicionalmente, os 18 checkpoints finais foram carregados
 com `strict=True` e os seis artefactos finais JSON/CSV
 foram verificados.
 
-Não foi executado um teste integrado completo de Flower.
-A avaliação final V2-C não foi repetida.
+
+Foram também executadas simulações federadas completas
+com Flower, envolvendo cinco clientes lógicos e 20 rondas
+de treino, tanto num cenário benigno como num cenário
+com um cliente malicioso.
+
+No cenário adversarial, o cliente 4 adulterou as
+atualizações do modelo GRU com um fator de -10.
+A verificação independente do checkpoint global
+da ronda 20 confirmou um F1-score de 0 e uma
+taxa de falsos positivos de aproximadamente 25,75%.
+
+Estas simulações complementam os testes automáticos,
+mas não constituem uma bateria exaustiva de testes
+automatizados de integração, comunicação ou segurança.
+
+As experiências utilizaram dados de desenvolvimento.
+A avaliação final reservada V2-C não foi repetida.

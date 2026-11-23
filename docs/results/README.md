@@ -1,5 +1,3 @@
-<!-- Gerado por gerar_documentacao_srsi.py; pode ser atualizado pelo script. -->
-
 # Resultados experimentais
 
 [← Índice da documentação](../README.md)
@@ -12,6 +10,7 @@ A análise distingue as experiências **V2-B (divisão temporal)** e **V2-C (sep
 - [Limitações e validade das conclusões](limitations.md)
 - [Experiência V2-B](../experiments/v2b.md)
 - [Experiência V2-C](../experiments/v2c.md)
+- [Demonstração Flower e model poisoning](../federated-security-demo.md)
 
 ## Dados publicados
 
@@ -23,3 +22,19 @@ Os CSV em [`results/tables/`](../../results/tables/) e o consolidado [`results/v
 - `v2c_final_mixed_ips_summary.csv`: 6 linhas, análise derivada dos dois IPs mistos.
 
 Não interpretar resultados de validação interna como se fossem resultados de avaliação final.
+
+## Experiência complementar de segurança
+
+Foi realizada uma demonstração federada com Flower,
+envolvendo cinco clientes lógicos e 20 rondas de treino.
+
+Na ronda 20, a GRU obteve um F1-score de 0,8705
+no cenário benigno e de 0,0000 no cenário com um
+cliente malicioso.
+
+Estes resultados foram obtidos com validação interna,
+separadamente da avaliação final V2-C.
+
+A configuração, os resultados, os artefactos e as
+limitações encontram-se descritos em
+[Demonstração federada e segurança](../federated-security-demo.md).

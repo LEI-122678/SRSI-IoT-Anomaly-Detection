@@ -18,6 +18,31 @@ A validação interna utiliza IPs diferentes dos do treino interno. Depois de co
 
 **Nota:** os três IPs reservados foram escolhidos deliberadamente após análise das distribuições; não são uma amostra aleatória. IP de origem não é necessariamente um dispositivo físico.
 
+## Experiência complementar — Segurança do treino federado
+
+[Documentação da demonstração Flower e do ataque de model poisoning](../federated-security-demo.md)
+
+Foi executada uma experiência complementar com uma
+arquitetura GRU, cinco clientes lógicos e 20 rondas
+federadas através de Flower/FedAvg.
+
+Foram comparados dois cenários:
+
+- **Benigno:** cinco clientes enviam atualizações legítimas.
+- **Adversarial:** o cliente 4 adultera as atualizações
+  dos parâmetros, aplicando um fator de -10.
+
+A experiência permite analisar o impacto de um cliente
+malicioso na aprendizagem federada, sem implementar
+mecanismos de defesa.
+
+Foram utilizadas 15 951 janelas de treino interno e
+5 060 janelas de validação interna.
+
+Os três IPs reservados para a avaliação final V2-C
+não foram utilizados. Por isso, esta experiência
+não altera os 18 resultados finais V2-C.
+
 ## Leitura recomendada
 
 Começa por [metodologia](../methodology.md), segue para [V2-B](v2b.md) e [V2-C](v2c.md) e termina em [comparação centralizada/federada](../results/centralized-vs-federated.md) e [limitações](../results/limitations.md).

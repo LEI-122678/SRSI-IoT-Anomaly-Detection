@@ -12,7 +12,7 @@ Este repositório reúne o código, os protocolos e os resultados de uma investi
 |---|---|
 | [Documentação completa](docs/README.md) | Índice de todas as páginas técnicas |
 | [Arquitetura](docs/architecture.md) | Componentes, modelos e interdependências |
-| [Inventário do código](docs/code-inventory.md) | Lista e responsabilidades dos 59 scripts Python |
+| [Inventário do código](docs/code-inventory.md) | Lista e responsabilidades dos 66 scripts Python |
 | [Dataset](docs/dataset.md) | ToN_IoT, características e preparação |
 | [Metodologia](docs/methodology.md) | Desenho experimental e métricas |
 | [Experiências](docs/experiments/README.md) | Percurso experimental e versões |
@@ -22,6 +22,8 @@ Este repositório reúne o código, os protocolos e os resultados de uma investi
 | [Centralizado vs. federado](docs/results/centralized-vs-federated.md) | Comparação quantitativa |
 | [Limitações](docs/results/limitations.md) | Validade e alcance das conclusões |
 | [Reprodutibilidade](docs/reproducibility.md) | Ambiente, scripts e precauções |
+| [Demonstração federada e segurança](docs/federated-security-demo.md) | Simulação Flower de 20 rondas e ataque de model poisoning |
+
 
 ## Objetivos
 
@@ -198,6 +200,66 @@ Para consultar os resultados **sem treinar ou avaliar novamente**:
 
 Para procedimentos adicionais, consultar a página de [reprodutibilidade](docs/reproducibility.md).
 
+
+## Demonstração federada e ataque de model poisoning
+
+Como extensão experimental de segurança, foi realizada
+uma demonstração de aprendizagem federada com Flower
+e FedAvg, utilizando uma arquitetura GRU e cinco
+clientes lógicos durante 20 rondas.
+
+Foram comparados dois cenários:
+
+- **Benigno:** todos os clientes enviam atualizações
+  legítimas dos parâmetros.
+- **Adversarial:** o cliente 4 altera sistematicamente
+  as suas atualizações, aplicando um fator de -10.
+
+### Resultados na ronda 20
+
+| Métrica | Benigno | Adversarial |
+|---|---:|---:|
+| F1-score | 0,8705 | 0,0000 |
+| Recall | 0,8493 | 0,0000 |
+| FPR | 0,0619 | 0,2575 |
+| Perda de validação | 0,2191 | 34,5546 |
+
+A avaliação independente do checkpoint global malicioso
+da ronda 20 confirmou que nenhuma das 1 911 janelas
+de ataque foi corretamente identificada, tendo sido
+registados 811 falsos positivos.
+
+Esta experiência utilizou exclusivamente dados de
+desenvolvimento, sendo independente da avaliação
+final V2-C. Os resultados não demonstram que todas
+as configurações de aprendizagem federada sejam
+igualmente vulneráveis.
+
+### Execução das demonstrações
+
+A partir da raiz do projeto, com as dependências e
+os dados preparados:
+
+**Cenário benigno:**
+
+    python -m src.federated.demo_20rounds_benign
+
+**Cenário adversarial:**
+
+    python -m src.federated.demo_20rounds_malicious
+
+Estes comandos iniciam novas simulações de treino.
+Não são necessários para consultar os resultados já
+obtidos. Antes de os executar, devem ser verificados
+os diretórios de saída para evitar substituir artefactos.
+
+Para consultar os detalhes técnicos, os resultados
+e as limitações:
+
+[Demonstração federada e segurança](docs/federated-security-demo.md)
+
+---
+
 ## Limitações científicas
 
 - **IPs de origem não são necessariamente dispositivos físicos.**
@@ -232,5 +294,12 @@ finais também foram verificados.
 
 Para executar os testes: `python -m pytest tests/ -v`.
 
-Estas verificações não constituem um teste integrado completo
-da simulação Flower nem repetem a avaliação final V2-C.
+Os quatro testes automáticos não constituem uma bateria
+exaustiva de testes de integração Flower.
+
+Foram, contudo, executadas simulações federadas completas
+com cinco clientes e 20 rondas, incluindo um cenário
+benigno e outro com model poisoning.
+
+Estas experiências utilizaram dados de desenvolvimento
+e não repetiram a avaliação final reservada V2-C.

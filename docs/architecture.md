@@ -142,6 +142,71 @@ O protocolo final foi registado em `results/v2c_final_protocol.json` antes da av
 
 Foram utilizadas três seeds: **42, 123 e 2026**, e um limiar de classificação de **0,5**.
 
+
+### Demonstração federada e cliente malicioso
+
+Como extensão experimental de segurança, foi
+implementada uma demonstração com Flower e FedAvg,
+utilizando uma GRU e cinco clientes lógicos.
+
+A demonstração distingue dois cenários:
+
+- **Benigno:** os cinco clientes enviam os parâmetros
+  resultantes do treino local.
+- **Adversarial:** quatro clientes enviam parâmetros
+  legítimos, enquanto o cliente 4 modifica a sua
+  atualização antes de a enviar ao servidor.
+
+O funcionamento do cenário adversarial é:
+
+1. O servidor distribui os parâmetros globais.
+2. Os cinco clientes executam uma época de treino local.
+3. O cliente 4 calcula a sua atualização adulterada.
+4. O servidor agrega os cinco conjuntos de parâmetros
+   através do FedAvg convencional.
+5. O processo repete-se durante 20 rondas.
+
+O cliente malicioso calcula os parâmetros enviados por:
+
+θ_mal = θ_global + α × (θ_local - θ_global)
+
+em que **α = -10**.
+
+Este fator inverte o sentido da atualização local
+e amplifica a sua magnitude dez vezes.
+
+A adulteração é aplicada aos parâmetros do modelo,
+não aos dados nem às etiquetas de treino, sendo
+classificada como **model poisoning**.
+
+O servidor não implementa mecanismos específicos
+de identificação ou rejeição de clientes maliciosos.
+
+Os componentes principais estão em `src/federated/`:
+
+| Componente | Ficheiro |
+|---|---|
+| Execução benigna | `demo_20rounds_benign.py` |
+| Servidor benigno | `demo_20rounds_benign_server.py` |
+| Cliente legítimo | `demo_flower_client.py` |
+| Execução adversarial | `demo_20rounds_malicious.py` |
+| Servidor adversarial | `demo_20rounds_malicious_server.py` |
+| Cliente malicioso | `demo_malicious_client.py` |
+
+Esta experiência utiliza 15 951 janelas de treino
+interno e 5 060 janelas de validação interna.
+
+Os três IPs reservados para a avaliação final V2-C
+não são utilizados nesta demonstração.
+
+Os resultados da experiência de segurança são
+independentes dos 18 checkpoints finais V2-C.
+
+Para instruções de execução, resultados e limitações,
+consultar [Demonstração federada e segurança](federated-security-demo.md).
+
+---
+
 ## 9. Avaliação e armazenamento dos resultados
 
 A avaliação final encontra-se implementada em:
