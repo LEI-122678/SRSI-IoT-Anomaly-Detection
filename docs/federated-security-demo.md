@@ -141,8 +141,13 @@ relatórios JSON e checkpoints PyTorch.
 O melhor checkpoint é selecionado pela menor perda
 de validação e pode não corresponder à ronda 20.
 
-Os históricos e checkpoints locais não devem ser
-considerados automaticamente disponíveis no GitHub.
+Os históricos de validação em CSV, os relatórios JSON
+e os quatro gráficos comparativos encontram-se
+disponíveis no repositório GitHub, em
+`results/demonstration/`.
+
+Os checkpoints PyTorch (`.pt`) permanecem armazenados
+localmente e não foram publicados no GitHub.
 
 Os gráficos comparativos podem ser produzidos
 a partir dos históricos correspondentes, mantendo

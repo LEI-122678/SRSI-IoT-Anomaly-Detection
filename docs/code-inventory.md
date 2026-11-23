@@ -68,13 +68,18 @@ Os scripts exploratórios e as experiências anteriores continuam arquivados por
 
 | Script | Responsabilidade |
 |---|---|
-|[`demo_20rounds_benign.py`](../src/federated/demo_20rounds_benign.py) | Execução da demonstração Flower benigna durante 20 rondas. |
+| [`demo_20rounds_benign.py`](../src/federated/demo_20rounds_benign.py) | Execução da demonstração Flower benigna durante 20 rondas. |
 | [`demo_20rounds_benign_server.py`](../src/federated/demo_20rounds_benign_server.py) | Configuração do servidor federado benigno. |
 | [`demo_flower_client.py`](../src/federated/demo_flower_client.py) | Cliente legítimo utilizado na demonstração. |
 | [`demo_20rounds_malicious.py`](../src/federated/demo_20rounds_malicious.py) | Execução da demonstração com um cliente malicioso. |
 | [`demo_20rounds_malicious_server.py`](../src/federated/demo_20rounds_malicious_server.py) | Configuração do servidor no cenário adversarial. |
 | [`demo_malicious_client.py`](../src/federated/demo_malicious_client.py) | Cliente que inverte e amplifica a atualização local com fator -10. |
 | [`demo_compare.py`](../src/federated/demo_compare.py) | Comparação dos históricos das experiências benignas e adversariais. |
+| [`demo_flower.py`](../src/federated/demo_flower.py) | Execução exploratória de uma simulação Flower benigna. |
+| [`demo_flower_server.py`](../src/federated/demo_flower_server.py) | Configuração do servidor da demonstração Flower exploratória. |
+| [`demo_malicious.py`](../src/federated/demo_malicious.py) | Execução exploratória da simulação com um cliente malicioso. |
+| [`demo_malicious_server.py`](../src/federated/demo_malicious_server.py) | Configuração do servidor da demonstração adversarial exploratória. |
+| [`demo_predict.py`](../src/federated/demo_predict.py) | Carregamento de um checkpoint GRU federado para realizar previsões na validação interna. |
 | [`check_aggregation_order.py`](../src/federated/check_aggregation_order.py) | Verificação da ordem de agregação. |
 | [`check_fedavg_aggregation.py`](../src/federated/check_fedavg_aggregation.py) | Verificação da agregação FedAvg. |
 | [`check_fedavg_equivalence.py`](../src/federated/check_fedavg_equivalence.py) | Verificação de equivalência de implementações FedAvg. |
@@ -115,7 +120,7 @@ Os scripts exploratórios e as experiências anteriores continuam arquivados por
 - Para a metodologia, consultar [metodologia](methodology.md), [experiências](experiments/README.md) e [reprodutibilidade](reproducibility.md).
 - O protocolo e os resultados finais estão em `results/v2c_final_protocol.json` e `results/v2c_final_results_consolidated.json`.
 
-**Total:** 66 scripts funcionais/de análise listados, excluindo `__init__.py`.
+**Total:** 71 scripts funcionais/de análise listados, excluindo `__init__.py`.
 
 ## Testes automatizados
 
