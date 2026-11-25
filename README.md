@@ -99,7 +99,7 @@ O protocolo final está preservado em [`results/v2c_final_protocol.json`](result
 
 ## Resultados finais V2-C
 
-Médias e desvios-padrão entre as três sementes, nos **4 256 exemplos reservados**:
+Médias e desvios-padrão entre as três seeds, nos **4 256 exemplos reservados**:
 
 | Arquitetura | Abordagem | F1 médio ± desvio-padrão | Recall médio | FPR médio |
 |---|---|---:|---:|---:|
